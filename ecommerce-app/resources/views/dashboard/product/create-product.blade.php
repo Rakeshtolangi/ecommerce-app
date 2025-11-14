@@ -43,7 +43,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Description</label>
                                     <textarea name="description" class="form-control" rows="3" placeholder="Enter product description"></textarea>
-                                </div>`
+                                </div>
 
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="featured" id="featured">
