@@ -31,6 +31,22 @@
         });
     </script>
 
+    <script>
+document.getElementById('productImageInput')?.addEventListener('change', function (event) {
+    const preview = document.getElementById('productImagePreview');
+    const file = event.target.files[0];
+
+    if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = 'block';
+    } else {
+        preview.src = "";
+        preview.style.display = 'none';
+    }
+});
+</script>
+
+
 
 
     <!-- CSS Files -->
@@ -368,6 +384,28 @@
             });
         });
     </script>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const input = document.getElementById('productImageInput');
+    const preview = document.getElementById('productImagePreview');
+
+    if (!input || !preview) return;
+
+    input.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+
+        if (file) {
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = 'block';
+        } else {
+            preview.src = '';
+            preview.style.display = 'none';
+        }
+    });
+});
+</script>
+
     <!-- <script>
         (function($) {
             $.fn.uploader = function(options) {

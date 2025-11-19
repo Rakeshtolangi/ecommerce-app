@@ -29,9 +29,11 @@ Route::get('/about', [AboutController::class,'index']) ->name('about');
 Route::get('/admin', [DashboardController::class,'home'])->name('admin.home');
 
 // Product routes goes here
-Route::get('/admin/product', [ProductController::class,'index'])
+Route::get('/admin/products', [ProductController::class,'index'])
  ->name('admin.products');
 
 
  Route::get('/admin/create-product', [ProductController::class,'create'])
  ->name('create.product');
+
+ Route::POST('product/store',[ProductController::class,'store'])->name('product.store');

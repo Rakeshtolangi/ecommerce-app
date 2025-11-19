@@ -17,8 +17,22 @@
 
 
                 <div class="card shadow-sm">
+                    @if(@session('success'))
+                        <div class="alert alert-success">
+
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                    @endif
+
+
                     <div class="card-body">
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-4 border rounded p-3">
                                 <h5 class="bg-primary text-white p-2 rounded">Product Information</h5>
@@ -34,9 +48,10 @@
                                     <select name="category_id" class="form-select">
                                         <option value="">Select category</option>
                                         {{-- Example dynamic categories --}}
-                                        {{-- @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach --}}
+                                        @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">
+                                                {{$category->title }}</option>
+                            @endforeach
                                     </select>
                                 </div>
 
@@ -47,7 +62,7 @@
 
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="featured" id="featured">
-                                    <label class="form-check-label" for="featured">Featured Product</label>
+                                    <label class="form-check-label" for="is_featured">Featured Product</label>
                                 </div>
                             </div>
 
@@ -72,13 +87,13 @@
 
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label">Quantity in Stock</label>
-                                        <input type="number" name="stock" class="form-control" value="0">
+                                        <input type="number" name="qty" class="form-control" value="0">
                                     </div>
 
-                                    <div class="col-md-3 mb-3">
+                                    {{-- <div class="col-md-3 mb-3">
                                         <label class="form-label">SKU</label>
                                         <input type="text" name="sku" class="form-control" placeholder="Enter SKU">
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
 
@@ -90,7 +105,7 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Product Image</label>
-                                    <input type="file" name="product_image" class="form-control">
+                                    <input type="file" name="featured_image" class="form-control">
                                     <small class="text-muted">Preview:</small>
                                     <div class="border p-3 text-center text-muted">No image selected</div>
                                 </div>

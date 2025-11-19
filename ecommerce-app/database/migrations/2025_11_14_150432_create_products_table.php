@@ -21,10 +21,11 @@ return new class extends Migration
                   ->onDelete('cascade');
 
             $table->text('description')->nullable();
+            $table->boolean('is_featured')->default(false);
             $table->decimal('price',10,2);
             $table->decimal('sale_price',10,2);
             $table->bigInteger('qty');
-            $table->string('featured_image');
+            $table->string('featured_image')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });
