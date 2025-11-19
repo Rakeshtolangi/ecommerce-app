@@ -17,17 +17,17 @@
 
 
                 <div class="card shadow-sm">
-                    @if(@session('success'))
+                    @if (@session('success'))
                         <div class="alert alert-success">
 
                             {{ session('success') }}
                         </div>
                     @endif
 
-                    @if(session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
                     @endif
 
 
@@ -49,9 +49,9 @@
                                         <option value="">Select category</option>
                                         {{-- Example dynamic categories --}}
                                         @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">
-                                                {{$category->title }}</option>
-                            @endforeach
+                                            <option value="{{ $category->id }}">
+                                                {{ $category->title }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -61,7 +61,9 @@
                                 </div>
 
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="featured" id="featured">
+                                    <input type="hidden" name="is_featured" value="0">
+                                    <input type="checkbox" class="form-check-input" name="is_featured" id="is_featured"
+                                        value="1">
                                     <label class="form-check-label" for="is_featured">Featured Product</label>
                                 </div>
                             </div>

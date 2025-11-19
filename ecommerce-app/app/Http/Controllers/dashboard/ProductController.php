@@ -30,7 +30,7 @@ class ProductController extends Controller
                 'name' => 'required|string|max:255',
                 'category_id' => 'required',
                 'description' => 'nullable|string',
-                'is_featured' => 'nullable|string',
+                'is_featured' => 'required|boolean',
                 'price' => 'required',
                 'sale_price' => 'nullable',
                 'featured_image' => 'nullable|string',
