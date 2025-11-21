@@ -11,15 +11,13 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return view('dashboard.product.products');
+        $products = Product::with('category')->get();
+        return view('dashboard.product.products', compact('products'));
     }
 
     public function create()
     {
-        //fetching data from table
         $categories = ProductCategory::all();
-        // dd($categories->toArray());
-
         return view('dashboard.product.create-product', compact('categories'));
     }
 
@@ -28,24 +26,55 @@ class ProductController extends Controller
         try {
             $data = $request->validate([
                 'name' => 'required|string|max:255',
-                'category_id' => 'required',
+                'category_id' => 'required|integer',
                 'description' => 'nullable|string',
-                'is_featured' => 'required|boolean',
-                'price' => 'required',
-                'sale_price' => 'nullable',
-                'featured_image' => 'nullable|string',
-                'qty' => 'required|numeric',
+                'is_featured' => 'nullable',
+                'price' => 'required|numeric',
+                'sale_price' => 'nullable|numeric',
+                'qty' => 'required|numeric'
             ]);
 
+            // Fix checkbox
+            $data['is_featured'] = $request->has('is_featured') ? 1 : 0;
 
             Product::create($data);
 
-            return redirect()->route('create.product')->with('success', 'Product Created Successfully!!!');
-
+            return redirect()->route('admin.products')->with('success', 'Product Created Successfully!');
         } catch (\Exception $e) {
-            return redirect()->route('create.product')->with('error', 'something went wrong' . $e->getMessage());
+            return back()->with('error', 'Something went wrong: ' . $e->getMessage());
         }
+    }
 
+    public function edit($id)
+    {
+        $categories = ProductCategory::all();
+        $product = Product::findOrFail($id);
 
+        return view('dashboard.product.edit-product', compact('categories', 'product'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $data = $request->validate([
+                'name' => 'required|string|max:255',
+                'category_id' => 'required|integer',
+                'description' => 'nullable|string',
+                'is_featured' => 'nullable',
+                'price' => 'required|numeric',
+                'sale_price' => 'nullable|numeric',
+                'qty' => 'required|numeric'
+            ]);
+
+            // Fix checkbox
+            $data['is_featured'] = $request->has('is_featured') ? 1 : 0;
+
+            Product::where('id', $id)->update($data);
+
+            return redirect()->route('admin.products')
+                ->with('success', 'Product Updated Successfully!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Something went wrong: ' . $e->getMessage());
+        }
     }
 }

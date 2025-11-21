@@ -33,7 +33,9 @@ Route::get('/admin/products', [ProductController::class,'index'])
  ->name('admin.products');
 
 
- Route::get('/admin/create-product', [ProductController::class,'create'])
+Route::get('/admin/create-product', [ProductController::class,'create'])
  ->name('create.product');
 
- Route::POST('product/store',[ProductController::class,'store'])->name('product.store');
+Route::POST('product/store',[ProductController::class,'store'])->name('product.store');
+Route::get('/product/{id}/edit', [ProductController::class,'edit'])-> name('product.edit');
+Route::POST('/products/{id}/update',[ProductController::class,'update'])->name('product.update');

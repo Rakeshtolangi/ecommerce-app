@@ -128,7 +128,7 @@ document.getElementById('productImageInput')?.addEventListener('change', functio
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarLayoutsEnquiries">
                                 <i class="far fa-lightbulb"></i>
-                                <p>Products</p>
+                                <p> Manage Products</p>
                                 <span class="caret"></span>
                             </a>
                             <div class="collapse" id="sidebarLayoutsEnquiries">
@@ -341,8 +341,8 @@ document.getElementById('productImageInput')?.addEventListener('change', functio
     <script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
 
 
-    <script src="https://cdn.tiny.cloud/1/7wd2m5v2a2lpqszixi9ckr6gcg4lag8bbkzbevi88mbzcu4w/tinymce/7/tinymce.min.js"
-        referrerpolicy="origin"></script>
+    {{-- <script src="https://cdn.tiny.cloud/1/7wd2m5v2a2lpqszixi9ckr6gcg4lag8bbkzbevi88mbzcu4w/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script> --}}
 
     <script>
         tinymce.init({
