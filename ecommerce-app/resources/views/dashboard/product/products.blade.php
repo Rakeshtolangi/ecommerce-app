@@ -146,9 +146,12 @@
     <div class="container">
 
         <div class="page-inner">
-            <div class="page-header d-flex justify-content-between align-items-center mb-4">
-                <h3 class="fw-bold mb-0">Manage Products</h3>
-                <a href="{{route('create.product')}}" class="btn btn-primary">
+            <div class="page-header d-flex justify-content-between ">
+                <h3 class="fw-bold mb-0">Manage category</h3>
+                <a href="{{ route('category.show') }}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i> Product Category
+                </a>
+                <a href="{{ route('create.product') }}" class="btn btn-primary">
                     <i class="bi bi-plus-circle me-1"></i> Add Product
                 </a>
             </div>
@@ -171,7 +174,7 @@
                             <table id="student-datatables" class="datatables display table table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        {{-- <th>S.N.</th> --}}
+                                        <th>S.N.</th>
                                         <th>Product</th>
                                         <th>Category</th>
                                         <th> Price</th>
@@ -184,40 +187,43 @@
                                 </thead>
 
                                 <tbody>
-                                @foreach ($products as $product)
-                                <tr>
-                                    <td>{{ $product->name }}</td>
-                                    <td>{{ $product->category->title }}</td>
-                                    <td>{{ $product->price }}</td>
-                                    <td>{{ $product->sale_price }}</td>
-                                    <td>{{ $product->qty }}</td>
-                                    <td>
-                                        @if ($product->is_featured == 1)
-                                        <span>Yes</span>
-                                        @else
-                                        <span>No</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <span></span>
-                                        {{ $product->status == 1 ? 'Active' : 'Inactive' }}
-                                    </td>
+                                    @foreach ($products as $product)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $product->name }}</td>
+                                            <td>{{ $product->category->title }}</td>
+                                            <td>{{ $product->price }}</td>
+                                            <td>{{ $product->sale_price }}</td>
+                                            <td>{{ $product->qty }}</td>
+                                            <td>
+                                                @if ($product->is_featured == 1)
+                                                    <span>Yes</span>
+                                                @else
+                                                    <span>No</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <span></span>
+                                                {{ $product->status == 1 ? 'Active' : 'Inactive' }}
+                                            </td>
 
-                                    <td>
-                                        <a href="#" class="btn btn-primary ">View</a>
-                                        <a href="{{ route('product.edit',
-                                        $product->id) }}"
-                                            class="btn btn-warning">Edit</a>
-                                        <form action="#" method="POST"
-                                            style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
+                                            <td>
+                                                <a href="#" class="btn btn-primary ">View</a>
+                                                <a href="{{ route('product.edit', $product->id) }}"
+                                                    class="btn btn-warning">Edit</a>
+                                                <form action="{{ route('product.delete', $product->id) }}" method="POST"
+                                                    style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        onclick="return confirm('Are you sure you want to delete this product?')">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
 
                             </table>
                         </div>
