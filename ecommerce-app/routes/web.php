@@ -29,7 +29,13 @@ Route::get('/forget-password', [AuthenticationController::class,'ShowForgetPassw
 Route::get('/about', [AboutController::class,'index']) ->name('about');
 
 // Dashboard routes goes here
-Route::get('/admin', [DashboardController::class,'home'])->name('admin.home');
+Route::middleware(['auth', 'is_admin'])
+->group(function () {
+
+    Route::get('/admin', [DashboardController::class,'home'])->name('admin.home');
+
+
+});
 
 // Product routes goes here
 Route::get('/admin/products', [ProductController::class,'index'])
