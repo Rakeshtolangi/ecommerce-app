@@ -1,4 +1,6 @@
 @extends('dashboard.layouts.app')
+@section('title','Product - Ecommerce Dashboard')
+
 <style>
     .file-uploader {
         background-color: #dbefe9;

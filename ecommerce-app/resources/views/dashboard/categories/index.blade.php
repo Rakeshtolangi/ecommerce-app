@@ -1,4 +1,6 @@
 @extends('dashboard.layouts.app')
+@section('title','ProductCategory - Ecommerce Dashboard')
+
 
 @section('content')
 <div class="container mt-4">

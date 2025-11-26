@@ -1,4 +1,5 @@
 @extends('dashboard.layouts.app')
+@section('title','Home - Ecommerce Dashboard')
 
 @section('content')
 

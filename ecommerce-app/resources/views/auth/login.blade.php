@@ -151,15 +151,16 @@
             <p>Access your account securely</p>
         </div>
 
-        <form id="loginForm">
+        <form id="loginForm" method="POST" action="{{ route('login') }}">
+            @csrf
             <div class="input-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Enter your username" required>
+                <label for="email">email</label>
+                <input type="email" id="email" placeholder="Enter your email" value="{{ old('email') }}" name="email" required>
             </div>
 
             <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter your password" required>
+                <input type="password" id="password" placeholder="Enter your password" name="password" required>
             </div>
 
             <div class="remember-forgot">
@@ -174,42 +175,8 @@
         </form>
 
         <div class="footer">
-            <p>&copy; 2023 Admin Panel. All rights reserved.</p>
+            <p>&copy; 2025 Admin Panel. All rights reserved.</p>
         </div>
     </div>
-
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const rememberMe = document.getElementById('remember').checked;
-
-            // Simple validation
-            if(username === '' || password === '') {
-                alert('Please fill in all fields');
-                return;
-            }
-
-            // In a real application, you would send this data to a server
-            console.log('Login attempt:', { username, password, rememberMe });
-
-            // For demo purposes, show a success message
-            alert('Login successful! (This is a demo)');
-
-            // Reset form
-            document.getElementById('loginForm').reset();
-        });
-
-        // Forgot password functionality
-        document.querySelector('.forgot-password').addEventListener('click', function(e) {
-            e.preventDefault();
-            const email = prompt('Please enter your email to reset your password:');
-            if(email) {
-                alert('Password reset instructions have been sent to ' + email);
-            }
-        });
-    </script>
 </body>
 </html>

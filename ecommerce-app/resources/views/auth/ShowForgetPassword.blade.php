@@ -193,7 +193,7 @@
         <a href="{{ route('ShowLogin') }}" class="#">← Back to Login</a>
 
         <div class="footer">
-            <p>&copy; 2023 Admin Panel. All rights reserved.</p>
+            <p>&copy; 2025 Admin Panel. All rights reserved.</p>
         </div>
     </div>
 
