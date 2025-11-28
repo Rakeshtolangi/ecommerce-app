@@ -16,8 +16,8 @@ class AuthenticationController extends Controller
     public function login(Request $request){
         try{
             $data = $request->validate([
-                'email' => 'required | email',
-                'password' => 'required | min:6',
+                'email' => 'required|email',
+                'password' => 'required|min:6',
             ]);
 
             if(Auth::attempt($data)){
@@ -40,4 +40,13 @@ class AuthenticationController extends Controller
     public function ShowForgetPassword(){
         return view ('auth.ShowForgetPassword');
     }
+
+    public function logout(){
+        Auth::logout();
+
+        return redirect()->route('ShowLogin')->with('success',
+        'Logout successfully');
+    }
+
+
 }

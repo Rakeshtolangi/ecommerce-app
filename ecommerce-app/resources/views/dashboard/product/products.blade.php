@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.app')
-@section('title','Product - Ecommerce Dashboard')
+@section('title', 'Product - Ecommerce Dashboard')
 
 <style>
     .file-uploader {
@@ -159,9 +159,15 @@
             </div>
         </div>
 
-        @if ($message = Session::get('success'))
+        @if (session('success'))
             <div class="alert alert-success">
-                <p>{{ $message }}</p>
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
             </div>
         @endif
         <div class="row">
