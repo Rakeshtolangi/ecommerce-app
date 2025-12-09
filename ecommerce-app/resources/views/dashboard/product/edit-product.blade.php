@@ -66,7 +66,7 @@
                                 <div class="form-check">
                                     <input type="hidden" name="is_featured" value="0">
                                     <input type="checkbox" class="form-check-input" name="is_featured" id="is_featured"
-                                        {{ $product->is_featured == 1 ? 'checked' : '' }}>
+                                          {{ $product->is_featured == 1 ? 'checked' : '' }}>
                                     <label class="form-check-label" for="is_featured">Featured Product</label>
                                 </div>
                             </div>
@@ -108,9 +108,15 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Product Image</label>
-                                    <input type="file" name="featured_image" class="form-control">
+                                    <input id="productImageInput" type="file" name="featured_image" class="form-control" accept="image/*">
                                     <small class="text-muted">Preview:</small>
-                                    <div class="border p-3 text-center text-muted">No image selected</div>
+                                    @if(!empty($product->featured_image) && file_exists(public_path('uploads/products/' . $product->featured_image)))
+                                    <img id="productImagePreview" src="{{ asset('uploads/products/' . $product->featured_image) }}" alt="Preview" class="img-thumbnail" style="max-width:200px; max-height:200px; margin-top:10px;" />
+                                    <div id="productImagePlaceholder" style="display:none;"></div>
+                                    @else
+                                    <div id="productImagePlaceholder" class="border p-3 text-center text-muted">No image selected</div>
+                                    <img id="productImagePreview" src="" alt="Preview" class="img-thumbnail" style="display:none; max-width:200px; max-height:200px; margin-top:10px;" />
+                                    @endif
                                 </div>
 
                                 <div class="mb-3">

@@ -86,11 +86,18 @@
                                 <p>Dashboard</p>
                             </a>
                         </li>
+                        {{-- user  --}}
+                        <li class="nav-item active">
+                            <a href="#" class="collapsed" aria-expanded="false">
+                                <i class="fas fa-user"></i>
+                                <p>User</p>
+                            </a>
+                        </li>
 
                         <!-- Manage Products -->
                         <li class="nav-item">
                             <a data-bs-toggle="collapse" href="#productsMenu">
-                                <i class="far fa-lightbulb"></i>
+                                <i class="far fa-home"></i>
                                 <p>Manage Products</p><span class="caret"></span>
                             </a>
                             <div class="collapse" id="productsMenu">
@@ -269,8 +276,6 @@
 
                     @yield('content')
                 </div>
-
-                @yield('content')
             </div>
 
             <!-- Footer -->
@@ -316,6 +321,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const input = document.getElementById('productImageInput');
             const preview = document.getElementById('productImagePreview');
+            const placeholder = document.getElementById('productImagePlaceholder');
             if (!input || !preview) return;
 
             input.addEventListener('change', function(event) {
@@ -323,9 +329,11 @@
                 if (file) {
                     preview.src = URL.createObjectURL(file);
                     preview.style.display = 'block';
+                    if (placeholder) placeholder.style.display = 'none';
                 } else {
                     preview.src = '';
                     preview.style.display = 'none';
+                    if (placeholder) placeholder.style.display = 'block';
                 }
             });
         });

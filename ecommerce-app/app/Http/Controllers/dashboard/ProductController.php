@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -31,11 +32,26 @@ class ProductController extends Controller
                 'is_featured' => 'nullable',
                 'price' => 'required|numeric',
                 'sale_price' => 'nullable|numeric',
+                'featured_image' => 'required|image|max:2048',
                 'qty' => 'required|numeric'
             ]);
 
             // Fix checkbox
             $data['is_featured'] = $request->has('is_featured') ? 1 : 0;
+
+            // Handle featured image upload
+            if ($request->hasFile('featured_image')) {
+                $image = $request->file('featured_image');
+                $imageName = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image->getClientOriginalName());
+
+                $destPath = public_path('uploads/products');
+                if (!File::exists($destPath)) {
+                    File::makeDirectory($destPath, 0755, true);
+                }
+
+                $image->move($destPath, $imageName);
+                $data['featured_image'] = $imageName;
+            }
 
             Product::create($data);
 
@@ -63,11 +79,33 @@ class ProductController extends Controller
                 'is_featured' => 'nullable',
                 'price' => 'required|numeric',
                 'sale_price' => 'nullable|numeric',
-                'qty' => 'required|numeric'
+                'qty' => 'required|numeric',
+                'featured_image' => 'nullable|image|max:2048'
             ]);
 
             // Fix checkbox
             $data['is_featured'] = $request->has('is_featured') ? 1 : 0;
+
+            // Handle featured image replacement if uploaded
+            if ($request->hasFile('featured_image')) {
+                $product = Product::findOrFail($id);
+
+                $image = $request->file('featured_image');
+                $imageName = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $image->getClientOriginalName());
+
+                $destPath = public_path('uploads/products');
+                if (!File::exists($destPath)) {
+                    File::makeDirectory($destPath, 0755, true);
+                }
+
+                // delete old image if exists
+                if (!empty($product->featured_image) && File::exists($destPath . '/' . $product->featured_image)) {
+                    File::delete($destPath . '/' . $product->featured_image);
+                }
+
+                $image->move($destPath, $imageName);
+                $data['featured_image'] = $imageName;
+            }
 
             Product::where('id', $id)->update($data);
 

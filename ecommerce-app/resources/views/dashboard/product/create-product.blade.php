@@ -17,7 +17,7 @@
 
 
                 <div class="card shadow-sm">
-                    @if (@session('success'))
+                    {{-- @if (@session('success'))
                         <div class="alert alert-success">
 
                             {{ session('success') }}
@@ -28,7 +28,7 @@
                         <div class="alert alert-danger">
                             {{ session('error') }}
                         </div>
-                    @endif
+                    @endif --}}
 
 
                     <div class="card-body">
@@ -107,9 +107,10 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Product Image</label>
-                                    <input type="file" name="featured_image" class="form-control">
+                                    <input id="productImageInput" type="file" name="featured_image" class="form-control" accept="image/*">
                                     <small class="text-muted">Preview:</small>
-                                    <div class="border p-3 text-center text-muted">No image selected</div>
+                                    <div id="productImagePlaceholder" class="border p-3 text-center text-muted">No image selected</div>
+                                    <img id="productImagePreview" src="" alt="Preview" class="img-thumbnail" style="display:none; max-width:900px; max-height:1200px; margin-top:10px;" />
                                 </div>
 
                                 <div class="mb-3">

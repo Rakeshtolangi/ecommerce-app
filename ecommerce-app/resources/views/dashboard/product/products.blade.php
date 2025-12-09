@@ -158,7 +158,7 @@
                 </a>
             </div>
         </div>
-
+{{--
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -169,7 +169,7 @@
             <div class="alert alert-danger">
                 {{ session('error') }}
             </div>
-        @endif
+        @endif --}}
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -190,6 +190,7 @@
                                         <th>Stock</th>
                                         <th>Is Featured</th>
                                         <th>Status</th>
+                                        <th>Featured Image</th>
                                         <th class="no-sorting">Actions</th>
                                     </tr>
                                 </thead>
@@ -213,6 +214,14 @@
                                             <td>
                                                 <span></span>
                                                 {{ $product->status == 1 ? 'Active' : 'Inactive' }}
+                                            </td>
+                                            <td>
+                                                @if (!empty($product->featured_image) && file_exists(public_path('uploads/products/' . $product->featured_image)))
+                                                    <img src="{{ asset('uploads/products/' . $product->featured_image) }}"
+                                                        alt="{{ $product->name }}" class="img-thumbnail" style="max-width:120px; max-height:120px; width:auto;" />
+                                                @else
+                                                    <span>No Image</span>
+                                                @endif
                                             </td>
 
                                             <td>
